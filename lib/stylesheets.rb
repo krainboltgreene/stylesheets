@@ -1,5 +1,4 @@
-require "stylesheets/version"
 
-module Stylesheets
+module StyleSheets
   # Your code goes here...
 end

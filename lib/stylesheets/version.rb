@@ -1,3 +1,3 @@
-module Stylesheets
-  VERSION = "0.0.1"
+module StyleSheets
+  VERSION = "1.0.0"
 end
