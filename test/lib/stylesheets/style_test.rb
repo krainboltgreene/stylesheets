@@ -8,7 +8,7 @@ class TestStyleSheetsStyle < MiniTest::Unit::TestCase
   end
 
   def test_to_s
-    expected = "#{@path} {}"
+    expected = "#{@path}{}"
     actual = @style.to_s
     assert_equal expected, actual
   end
