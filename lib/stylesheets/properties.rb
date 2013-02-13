@@ -10,13 +10,18 @@ module StyleSheets
 
     PROPERTY_GROUPS.each &method(:attr_accessor)
 
-    def initialize
+    def initialize(options = {})
+      self.compress = options.delete(:compress)
       self.text = Text.new
       self.background = Background.new
     end
 
     def empty?
       property_group_values.all?(&:empty?)
+    end
+
+    def compress
+      @compress || empty?
     end
 
     def to_s
