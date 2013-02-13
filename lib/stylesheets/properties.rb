@@ -20,11 +20,7 @@ module StyleSheets
     end
 
     def to_s
-      unless empty?
-        render_properties
-      else
-        ""
-      end
+      render_properties.join newline
     end
 
     private
