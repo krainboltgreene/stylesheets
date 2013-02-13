@@ -3,26 +3,12 @@ require_relative "shared/color"
 module StyleSheets
   class Properties
     class Text < Group
-      PROPERTY_NAMES = [:color]
+      @@property_names = [:color]
 
-      PROPERTY_NAMES.each &method(:attr_writer)
+      @@property_names.each &method(:attr_writer)
 
       def color(value, options = {})
-        @color = Color.new value, options
-      end
-
-      def empty?
-        values_for_properties.all? &:nil?
-      end
-
-      def to_s
-        values_for_properties.map(&:to_s)
-      end
-
-      private
-
-      def values_for_properties
-        PROPERTY_NAMES.map { |name| instance_variable_get :"@#{name}" }
+        @color = Color.new value, options.merge(owner: self)
       end
     end
   end

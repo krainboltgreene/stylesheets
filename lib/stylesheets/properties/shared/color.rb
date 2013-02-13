@@ -7,19 +7,18 @@ module StyleSheets
 
       def initialize(color, options = {})
         self.color = color
+        self.compress = options.delete(:compress)
         self.options = options
       end
 
       def to_s
-        "#{indent}#{prefix}color: #{color};"
+        "#{indent}#{prefix}color:#{space}#{color};"
       end
 
       private
 
       def prefix
-        if options[:prefix]
-          "#{options[:prefix]}-"
-        end
+        "#{options[:prefix]}-" if options[:prefix]
       end
     end
   end

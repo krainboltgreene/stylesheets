@@ -3,23 +3,24 @@ module StyleSheets
     DEFAULT_INDENTATION_CHARACTER = "  "
     DEFAULT_NEWLINE_CHARACTER = "\n"
 
+    attr_accessor :compress
 
-    def newline(compress = false)
-      whitespace compress, DEFAULT_NEWLINE_CHARACTER
+    def newline
+      whitespace DEFAULT_NEWLINE_CHARACTER
     end
 
-    def indent(compress = false)
-      whitespace compress, DEFAULT_INDENTATION_CHARACTER
+    def indent
+      whitespace DEFAULT_INDENTATION_CHARACTER
     end
 
-    def space(compress = false)
-      whitespace compress, " "
+    def space
+      whitespace " "
     end
 
     private
 
-    def whitespace(compress = false, with_whitespace)
-      compress ? "" : with_whitespace
+    def whitespace(with_whitespace)
+      unless compress then with_whitespace else "" end
     end
   end
 end

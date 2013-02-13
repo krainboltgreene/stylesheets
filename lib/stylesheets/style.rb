@@ -3,6 +3,10 @@ module StyleSheets
     include Whitespace
     extend Forwardable
 
+    DEFAULTS = {
+      compress: false
+    }
+
     attr_accessor :path, :options, :properties
 
     def_delegator :properties, :text
@@ -10,19 +14,18 @@ module StyleSheets
 
     def initialize(path, options = {}, &block)
       self.path = path
-      self.options = options
+      self.options = DEFAULTS.dup.merge! options
       self.properties = Properties.new
+      self.compress = self.options[:compress]
       instance_eval &block if block_given?
     end
 
     def to_s
-      "#{path}#{space(whitespace?)}{#{newline(whitespace?)}#{properties}#{newline(whitespace?)}}"
+      "#{path}#{space}\{#{newline}#{properties}#{newline}\}"
     end
 
-    private
-
-    def whitespace?
-      options[:compress] || true
+    def compress
+      properties.empty? || @compress
     end
   end
 end

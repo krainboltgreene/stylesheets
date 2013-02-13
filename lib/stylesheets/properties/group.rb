@@ -1,24 +1,34 @@
 module StyleSheets
   class Properties
     class Group
-      PROPERTY_NAMES = []
+      @@property_names = []
+
+      attr_accessor :owner
+
+      def initialize(owner)
+        self.owner = owner
+      end
 
       def empty?
         values_for_properties.all? &:nil?
       end
 
       def to_s
-        values_for_properties.map(&:to_s)
+        values_for_properties.map &:to_s unless empty?
       end
 
       private
 
       def values_for_properties
-        property_names.map { |name| instance_variable_get :"@#{name}" }
+        properties_as_ivariables.map &method(:instance_variable_get)
       end
 
-      def property_names
-        PROPERTY_NAMES
+      def to_ivar(name)
+        :"@#{name}"
+      end
+
+      def properties_as_ivariables
+        @@property_names.map &method(:to_ivar)
       end
     end
   end
