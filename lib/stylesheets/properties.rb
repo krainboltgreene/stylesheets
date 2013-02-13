@@ -5,9 +5,7 @@ require_relative "properties/background"
 module StyleSheets
   class Properties
     include Whitespace
-
     PROPERTY_GROUPS = [:text, :background]
-
     PROPERTY_GROUPS.each &method(:attr_accessor)
 
     def initialize(options = {})
