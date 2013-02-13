@@ -34,7 +34,7 @@ module StyleSheets
     end
 
     def render_properties
-      property_group_values.map(&:to_s).join newline(!empty?)
+      property_group_values.reject(&:empty?).map &:to_s
     end
   end
 end
